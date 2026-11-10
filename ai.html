@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三好四給｜心靈光明靜心卡生成器</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'serif'],
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+          },
+          colors: {
+            amber: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            },
+            zen: {
+              bg: '#FAF7F2',
+              card: '#FFFFFF',
+              primary: '#8C6D46',
+              dark: '#2C2520',
+              accent: '#C85A32'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #2C2520;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    .font-serif-custom {
+      font-family: 'Noto Serif TC', serif;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(217, 119, 6, 0.15);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #b45309 0%, #C85A32 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #d97706;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-amber-900">
+
+  <!-- Header Section -->
+  <header class="sticky top-0 z-50 glass-effect border-b border-amber-100/60 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-red-500 flex items-center justify-center text-white shadow-md">
+          <i class="fa-solid fa-hands-holding-circle text-lg"></i>
+        </div>
+        <div>
+          <span class="font-serif-custom font-bold text-xl sm:text-2xl tracking-wider text-amber-900 block leading-none">三好四給</span>
+          <span class="text-xs text-amber-700/80 tracking-widest block mt-1 font-medium">光明心靈．行善人間</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-amber-900/80">
+        <a href="#about" class="hover:text-amber-600 transition-colors">理念介紹</a>
+        <a href="#three-goods" class="hover:text-amber-600 transition-colors">身做好事・口說好話・心存好心</a>
+        <a href="#four-givings" class="hover:text-amber-600 transition-colors">四給精髓</a>
+        <a href="#generator" class="px-5 py-2.5 rounded-full bg-amber-600 text-white font-medium hover:bg-amber-700 transition-all shadow-md hover:shadow-lg flex items-center space-x-2">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>生成三好卡片</span>
+        </a>
+      </nav>
+
+      <a href="#generator" class="md:hidden px-4 py-2 rounded-full bg-amber-600 text-white text-sm font-medium hover:bg-amber-700 shadow-md">
+        生成卡片
+      </a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-amber-50/50 via-amber-100/20 to-transparent">
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs sm:text-sm font-semibold tracking-widest mb-6 shadow-sm border border-amber-200">
+          星雲大師心靈智慧
+        </span>
+        <h1 class="font-serif-custom text-4xl sm:text-5xl md:text-6xl font-extrabold text-amber-950 leading-tight mb-6 tracking-wide">
+          做好事．說好話．存好心<br>
+          <span class="gradient-text font-serif-custom">給人信心．給人希望．給人歡喜．給人方便</span>
+        </h1>
+        <p class="text-base sm:text-lg text-amber-800/80 max-w-2xl mx-auto leading-relaxed mb-10">
+          「三好」是修身的根本，把善意落實在言行與心念中；「四給」是利他的實踐，用慈悲與智慧照亮身邊的人。讓我們一起將善念化為美好的影像與文字。
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <a href="#generator" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 text-white font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>即刻生成三好四給靈感卡</span>
+          </a>
+          <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-amber-900 border border-amber-200 font-semibold text-lg hover:bg-amber-50 transition-all flex items-center justify-center">
+            了解三好四給
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Goods & Four Givings Intro Section -->
+    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-amber-950 mb-4">三好實踐：修身養性的根本</h2>
+        <p class="text-amber-800/70 max-w-xl mx-auto">淨化身口意，從日常生活中的微小善念開始</p>
+      </div>
+
+      <div id="three-goods" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <!-- 做好事 -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-amber-100 group relative overflow-hidden">
+          <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+          </div>
+          <h3 class="font-serif-custom text-2xl font-bold text-amber-900 mb-3">做好事 (身)</h3>
+          <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+            做有利於他人的事。不施小惡，多行小善。無論是伸出援手扶持他人、環保愛護地球，或是盡責做好本分，都是最直接的行善。
+          </p>
+          <div class="mt-6 pt-4 border-t border-amber-50 text-xs font-semibold text-amber-600 flex items-center justify-between">
+            <span>身行善事 廣結善緣</span>
+            <i class="fa-solid fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+          </div>
+        </div>
+
+        <!-- 說好話 -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-amber-100 group relative overflow-hidden">
+          <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-comment-dots"></i>
+          </div>
+          <h3 class="font-serif-custom text-2xl font-bold text-amber-900 mb-3">說好話 (口)</h3>
+          <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+            說讚美、鼓勵與建設性的話語。讚嘆他人的優點，給予誠摯的關懷，不傳播惡言與怨言，用溫柔溫暖的話語陪伴身邊的人。
+          </p>
+          <div class="mt-6 pt-4 border-t border-amber-50 text-xs font-semibold text-amber-600 flex items-center justify-between">
+            <span>口出蓮花 吐露芬芳</span>
+            <i class="fa-solid fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+          </div>
+        </div>
+
+        <!-- 存好心 -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-amber-100 group relative overflow-hidden">
+          <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <h3 class="font-serif-custom text-2xl font-bold text-amber-900 mb-3">存好心 (意)</h3>
+          <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+            保持慈悲、感恩與包容的心念。起心動念皆為善意，誠心希望他人離苦得樂，用溫柔開放的心看待世間人事物。
+          </p>
+          <div class="mt-6 pt-4 border-t border-amber-50 text-xs font-semibold text-amber-600 flex items-center justify-between">
+            <span>意存慈悲 心如明鏡</span>
+            <i class="fa-solid fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Four Givings Section -->
+      <div id="four-givings" class="bg-gradient-to-br from-amber-900 to-amber-950 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-600/10 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 mb-10 text-center">
+          <span class="inline-block px-3 py-1 rounded-full bg-amber-800/80 text-amber-200 text-xs font-semibold tracking-wider mb-3">利他菩薩道</span>
+          <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-amber-100">四給精神：圓滿自他的利他關懷</h2>
+          <p class="text-amber-200/80 mt-2 max-w-lg mx-auto text-sm sm:text-base">無私施予，將溫暖與光明傳遞給社會與大眾</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/15 transition-all">
+            <div class="text-amber-400 text-2xl font-bold font-serif-custom mb-2">01</div>
+            <h4 class="font-serif-custom text-xl font-bold mb-2">給人信心</h4>
+            <p class="text-amber-100/70 text-xs sm:text-sm leading-relaxed">肯定他人的價值，給予陪伴與鼓勵，使人面對挑戰時充滿勇氣與信念。</p>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/15 transition-all">
+            <div class="text-amber-400 text-2xl font-bold font-serif-custom mb-2">02</div>
+            <h4 class="font-serif-custom text-xl font-bold mb-2">給人希望</h4>
+            <p class="text-amber-100/70 text-xs sm:text-sm leading-relaxed">在他人迷茫困難時指引光明方向，帶來曙光，讓人心懷期盼展望未來。</p>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/15 transition-all">
+            <div class="text-amber-400 text-2xl font-bold font-serif-custom mb-2">03</div>
+            <h4 class="font-serif-custom text-xl font-bold mb-2">給人歡喜</h4>
+            <p class="text-amber-100/70 text-xs sm:text-sm leading-relaxed">以微笑與熱情感染身邊的人，帶來輕鬆愉悅的氛圍，化減憂愁與憂慮。</p>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/15 transition-all">
+            <div class="text-amber-400 text-2xl font-bold font-serif-custom mb-2">04</div>
+            <h4 class="font-serif-custom text-xl font-bold mb-2">給人方便</h4>
+            <p class="text-amber-100/70 text-xs sm:text-sm leading-relaxed">體諒他人的不易，適時伸出援手提供協助，為他人鋪路，圓滿人際關懷。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Generator Section -->
+    <section id="generator" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+      <div class="text-center mb-10">
+        <span class="px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wider">AI 智慧科技</span>
+        <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-amber-950 mt-3 mb-2">三好四給 靜心靈感卡生成器</h2>
+        <p class="text-amber-800/70 max-w-xl mx-auto text-sm sm:text-base">選擇您心儀的主題與視覺風格，讓 AI 爲您繪製充滿正能量的心靈卡片</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Controls Form -->
+        <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-amber-100">
+          <form id="generateForm" class="space-y-6">
+            
+            <!-- Theme Selection -->
+            <div>
+              <label class="block text-sm font-semibold text-amber-900 mb-3 flex items-center space-x-2">
+                <i class="fa-solid fa-bookmark text-amber-600"></i>
+                <span>1. 選擇三好四給主題</span>
+              </label>
+              <div class="grid grid-cols-2 gap-2.5">
+                <button type="button" data-theme="做好事" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all flex items-center space-x-2">
+                  <i class="fa-solid fa-hands-holding-circle text-amber-600"></i>
+                  <span>做好事</span>
+                </button>
+                <button type="button" data-theme="說好話" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all flex items-center space-x-2">
+                  <i class="fa-solid fa-comment-heart text-amber-600"></i>
+                  <span>說好話</span>
+                </button>
+                <button type="button" data-theme="存好心" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all flex items-center space-x-2">
+                  <i class="fa-solid fa-heart text-amber-600"></i>
+                  <span>存好心</span>
+                </button>
+                <button type="button" data-theme="給人信心" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all flex items-center space-x-2">
+                  <i class="fa-solid fa-sun text-amber-600"></i>
+                  <span>給人信心</span>
+                </button>
+                <button type="button" data-theme="給人希望" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all flex items-center space-x-2">
+                  <i class="fa-solid fa-seedling text-amber-600"></i>
+                  <span>給人希望</span>
+                </button>
+                <button type="button" data-theme="給人歡喜" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all flex items-center space-x-2">
+                  <i class="fa-solid fa-face-smile text-amber-600"></i>
+                  <span>給人歡喜</span>
+                </button>
+                <button type="button" data-theme="給人方便" class="theme-btn border border-amber-200 hover:border-amber-600 p-3 rounded-xl text-left font-medium text-xs sm:text-sm text-gray-700 hover:bg-amber-50 transition-all col-span-2 flex items-center space-x-2 justify-center">
+                  <i class="fa-solid fa-handshake text-amber-600"></i>
+                  <span>給人方便</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Style Selection -->
+            <div>
+              <label class="block text-sm font-semibold text-amber-900 mb-3 flex items-center space-x-2">
+                <i class="fa-solid fa-palette text-amber-600"></i>
+                <span>2. 選擇藝術藝術風格</span>
+              </label>
+              <select id="styleSelect" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-950 font-medium focus:ring-2 focus:ring-amber-600 focus:outline-none">
+                <option value="靜謐東方水墨，淡雅蓮花與山水意境，典雅簡約">靜謐水墨山水 (Zen Ink Wash)</option>
+                <option value="溫暖治癒插畫，柔和晨光與植物卉，清涼恬靜">溫暖治癒插畫 (Warm Illustration)</option>
+                <option value="極簡東方禪意光影，晨霧與菩提樹，靈動質感">極簡東方禪意 (Minimalist Zen)</option>
+                <option value="夢幻水彩渲染，溫柔光芒與自然景象，詩意溫馨">夢幻色彩水彩 (Dreamy Watercolor)</option>
+                <option value="金色日光璀璨，蔚藍天空與朵朵白雲，生機盎然">光明生機風景 (Sunlight Landscape)</option>
+              </select>
+            </div>
+
+            <!-- Aspect Ratio -->
+            <div>
+              <label class="block text-sm font-semibold text-amber-900 mb-3 flex items-center space-x-2">
+                <i class="fa-solid fa-crop-simple text-amber-600"></i>
+                <span>3. 卡片比例</span>
+              </label>
+              <div class="grid grid-cols-3 gap-3">
+                <label class="ratio-label border border-amber-200 rounded-xl p-3 text-center cursor-pointer hover:bg-amber-50 transition-all flex flex-col items-center">
+                  <input type="radio" name="aspectRatio" value="1:1" class="hidden" checked>
+                  <span class="text-xs font-semibold text-amber-900">正方形 (1:1)</span>
+                  <span class="text-[10px] text-gray-500 mt-1">社群貼文</span>
+                </label>
+                <label class="ratio-label border border-amber-200 rounded-xl p-3 text-center cursor-pointer hover:bg-amber-50 transition-all flex flex-col items-center">
+                  <input type="radio" name="aspectRatio" value="9:16" class="hidden">
+                  <span class="text-xs font-semibold text-amber-900">直式 (9:16)</span>
+                  <span class="text-[10px] text-gray-500 mt-1">手機桌布/限時動態</span>
+                </label>
+                <label class="ratio-label border border-amber-200 rounded-xl p-3 text-center cursor-pointer hover:bg-amber-50 transition-all flex flex-col items-center">
+                  <input type="radio" name="aspectRatio" value="4:3" class="hidden">
+                  <span class="text-xs font-semibold text-amber-900">橫式 (4:3)</span>
+                  <span class="text-[10px] text-gray-500 mt-1">橫向簡報</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Custom Quote/Message -->
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-semibold text-amber-900 flex items-center space-x-2">
+                  <i class="fa-solid fa-quote-left text-amber-600"></i>
+                  <span>4. 心靈祝福金句 (可自動生成)</span>
+                </label>
+                <button type="button" id="randomQuoteBtn" class="text-xs text-amber-700 hover:text-amber-900 flex items-center space-x-1">
+                  <i class="fa-solid fa-arrows-rotate"></i>
+                  <span>換一句</span>
+                </button>
+              </div>
+              <textarea id="customQuote" rows="3" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl p-3 text-sm text-amber-950 focus:ring-2 focus:ring-amber-600 focus:outline-none placeholder-amber-800/40" placeholder="輸入或選擇一句傳遞三好四給祝福的語錄..."></textarea>
+            </div>
+
+            <!-- Action Button -->
+            <button type="submit" id="generateBtn" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-white font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+              <span>生成三好四給靈感圖片</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Preview Card Section -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center">
+          <div class="w-full bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-amber-100 flex flex-col items-center min-h-[500px]">
+            
+            <div class="w-full flex justify-between items-center mb-4">
+              <span class="text-xs font-semibold text-amber-800 tracking-wider flex items-center space-x-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+                <span>靈感卡片預覽</span>
+              </span>
+              <span id="statusTag" class="text-xs text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full">準備就緒</span>
+            </div>
+
+            <!-- Card Display Container -->
+            <div id="cardContainer" class="relative w-full max-w-md bg-amber-50/50 rounded-2xl overflow-hidden border border-amber-200/80 shadow-inner flex items-center justify-center min-h-[380px] my-auto">
+              
+              <!-- Placeholder State -->
+              <div id="placeholderState" class="text-center p-8">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-3xl shadow-sm">
+                  <i class="fa-regular fa-image"></i>
+                </div>
+                <h4 class="font-serif-custom text-xl font-bold text-amber-950 mb-2">打造專屬善念卡片</h4>
+                <p class="text-xs sm:text-sm text-gray-500 max-w-xs mx-auto">點選左側主題與風格，點擊「生成」按鈕，讓 AI 為您繪製傳遞好心好意的心靈卡片。</p>
+              </div>
+
+              <!-- Loading State -->
+              <div id="loadingState" class="hidden flex-col items-center justify-center p-8 text-center space-y-4">
+                <div class="relative w-16 h-16">
+                  <div class="absolute inset-0 rounded-full border-4 border-amber-200 animate-ping opacity-75"></div>
+                  <div class="relative w-16 h-16 rounded-full border-4 border-amber-600 border-t-transparent animate-spin flex items-center justify-center">
+                    <i class="fa-solid fa-dharmachakra text-amber-600 text-xl"></i>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-serif-custom text-lg font-bold text-amber-950">AI 繪製中...</h4>
+                  <p class="text-xs text-amber-700/80 mt-1">正在融合「三好四給」意境與光影...</p>
+                </div>
+              </div>
+
+              <!-- Result Generated Card (Image Overlay + Text) -->
+              <div id="resultCard" class="hidden relative w-full h-full group overflow-hidden">
+                <img id="generatedImg" src="" alt="三好四給靈感圖" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                
+                <!-- Overlay Quote Box -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
+                  <span id="cardBadge" class="inline-block self-start px-3 py-1 rounded-full bg-amber-600/90 backdrop-blur-md text-white text-[11px] font-bold tracking-widest mb-3 shadow-sm">
+                    做好事
+                  </span>
+                  <p id="cardText" class="font-serif-custom text-lg sm:text-xl font-medium leading-relaxed tracking-wide text-amber-50 drop-shadow-md mb-3">
+                    「存好心、說好話、做好事」
+                  </p>
+                  <div class="flex justify-between items-end text-[10px] text-amber-200/80 border-t border-white/20 pt-3">
+                    <span>三好四給 • 心靈靜心卡</span>
+                    <span>Gemini AI 靈感繪製</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Action Bar -->
+            <div id="actionBar" class="w-full max-w-md mt-6 hidden flex-wrap sm:flex-nowrap gap-3">
+              <button id="downloadBtn" class="flex-1 py-3 px-4 rounded-xl bg-amber-900 text-white font-medium text-xs sm:text-sm hover:bg-amber-800 transition-all flex items-center justify-center space-x-2 shadow-sm">
+                <i class="fa-solid fa-download"></i>
+                <span>下載高清卡片</span>
+              </button>
+              <button id="copyQuoteBtn" class="flex-1 py-3 px-4 rounded-xl bg-amber-100 text-amber-900 font-medium text-xs sm:text-sm hover:bg-amber-200 transition-all flex items-center justify-center space-x-2 shadow-sm">
+                <i class="fa-solid fa-copy"></i>
+                <span>複製金句文字</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Message Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-amber-900 text-white px-5 py-3 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 text-sm">
+      <i id="toastIcon" class="fa-solid fa-circle-check text-amber-400"></i>
+      <span id="toastMsg">訊息通知</span>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-amber-950 text-amber-200/60 py-10 border-t border-amber-900">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <div class="flex items-center justify-center space-x-2 mb-4">
+        <div class="w-8 h-8 rounded-full bg-amber-600 flex items-center justify-center text-white text-xs">
+          <i class="fa-solid fa-hands-holding-circle"></i>
+        </div>
+        <span class="font-serif-custom text-lg font-bold text-amber-100">三好四給 心靈光明</span>
+      </div>
+      <p class="text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6">
+        身做好事 • 口說好話 • 心存好心<br>
+        給人信心 • 給人希望 • 給人歡喜 • 給人方便
+      </p>
+      <div class="text-[11px] text-amber-400/50">
+        © 2026 三好四給推廣專頁 | 由 Gemini 3.1 Flash Image 技術驅動
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Quotes dictionary for "Three Goodness and Four Givings"
+    const quotesData = {
+      "做好事": [
+        "行善不嫌事小，點滴匯聚成河。隨手播下善的種子。",
+        "伸手扶人一把，是最美的姿態。用身行善，光明人間。",
+        "每一個善舉，都是點亮世間微光的力量。"
+      ],
+      "說好話": [
+        "良言一句三冬暖，用溫柔與真誠的話語撫平人心。",
+        "多一句讚美與鼓勵，為生命帶來溫暖的芬芳。",
+        "口出善言，圓滿自他，讓言語成為治癒的力量。"
+      ],
+      "存好心": [
+        "心如明鏡，起心動念皆是慈悲與包容。",
+        "心中若有陽光，走過之處皆綻放希望的花朵。",
+        "保持清淨與感謝的心，看待世間萬物皆美好。"
+      ],
+      "給人信心": [
+        "肯定他人的微小進步，為他注入勇敢前行的力量。",
+        "信任與陪伴，能喚醒人心深處無窮的潛能。",
+        "一句「我相信你」，是世上最具力量的禮物。"
+      ],
+      "給人希望": [
+        "在黑暗中為人點一盞燈，看見黎明升起的勇氣。",
+        "永不放棄善意，讓明日充滿期盼與轉機。",
+        "指引光明的方向，種下希望的秧苗。"
+      ],
+      "給人歡喜": [
+        "用燦爛的微笑與熱情，感染周遭的每一個人。",
+        "歡喜無價，給人快樂是世上最富有的人。",
+        "放下執著，分享歡喜，讓生命充滿歡歌笑語。"
+      ],
+      "給人方便": [
+        "多體諒他人一步，處處為人著想，路越走越寬廣。",
+        "給人方便就是給自己方便，成就他人的圓滿。",
+        "默默付出與貼心協助，讓社會更加的和諧溫馨。"
+      ]
+    };
+
+    let selectedTheme = "做好事";
+    let generatedImageData = null;
+
+    // DOM Elements
+    const themeBtns = document.querySelectorAll('.theme-btn');
+    const styleSelect = document.getElementById('styleSelect');
+    const customQuote = document.getElementById('customQuote');
+    const randomQuoteBtn = document.getElementById('randomQuoteBtn');
+    const generateForm = document.getElementById('generateForm');
+    const generateBtn = document.getElementById('generateBtn');
+
+    const placeholderState = document.getElementById('placeholderState');
+    const loadingState = document.getElementById('loadingState');
+    const resultCard = document.getElementById('resultCard');
+    const generatedImg = document.getElementById('generatedImg');
+    const cardBadge = document.getElementById('cardBadge');
+    const cardText = document.getElementById('cardText');
+    const statusTag = document.getElementById('statusTag');
+    const actionBar = document.getElementById('actionBar');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const copyQuoteBtn = document.getElementById('copyQuoteBtn');
+    const cardContainer = document.getElementById('cardContainer');
+
+    // Toast function
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMsg.textContent = message;
+      if (isError) {
+        toastIcon.className = "fa-solid fa-circle-xmark text-red-400";
+      } else {
+        toastIcon.className = "fa-solid fa-circle-check text-amber-400";
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    // Handle Theme Selection
+    function selectTheme(theme) {
+      selectedTheme = theme;
+      themeBtns.forEach(btn => {
+        if (btn.dataset.theme === theme) {
+          btn.classList.add('bg-amber-600', 'text-white', 'border-amber-600');
+          btn.classList.remove('text-gray-700', 'hover:bg-amber-50', 'border-amber-200');
+          btn.querySelector('i').classList.remove('text-amber-600');
+          btn.querySelector('i').classList.add('text-white');
+        } else {
+          btn.classList.remove('bg-amber-600', 'text-white', 'border-amber-600');
+          btn.classList.add('text-gray-700', 'hover:bg-amber-50', 'border-amber-200');
+          btn.querySelector('i').classList.add('text-amber-600');
+          btn.querySelector('i').classList.remove('text-white');
+        }
+      });
+      updateQuotePlaceholder();
+    }
+
+    // Set Random Quote based on current theme
+    function setRandomQuote() {
+      const quotes = quotesData[selectedTheme] || quotesData["做好事"];
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      customQuote.value = quotes[randomIndex];
+    }
+
+    function updateQuotePlaceholder() {
+      if (!customQuote.value.trim()) {
+        setRandomQuote();
+      }
+    }
+
+    // Init Theme selection
+    themeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectTheme(btn.dataset.theme);
+        setRandomQuote();
+      });
+    });
+
+    randomQuoteBtn.addEventListener('click', setRandomQuote);
+    selectTheme("做好事");
+
+    // Handle Aspect Ratio Styles in Preview Container
+    const ratioRadios = document.querySelectorAll('input[name="aspectRatio"]');
+    ratioRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val === '1:1') {
+          cardContainer.style.aspectRatio = "1 / 1";
+        } else if (val === '9:16') {
+          cardContainer.style.aspectRatio = "9 / 16";
+        } else if (val === '4:3') {
+          cardContainer.style.aspectRatio = "4 / 3";
+        }
+      });
+    });
+    cardContainer.style.aspectRatio = "1 / 1"; // default
+
+    // Generate Image using Gemini API (gemini-3.1-flash-image)
+    async function generateImage(promptText, aspectRatio) {
+      const apiKey = ""; // Canvas automatically supplies API key at runtime if empty
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+
+      const payload = {
+        contents: [{
+          role: "user",
+          parts: [{ text: promptText }]
+        }],
+        generationConfig: {
+          responseModalities: ["IMAGE"],
+          imageConfig: {
+            aspectRatio: aspectRatio
+          }
+        }
+      };
+
+      // Exponential backoff fetch
+      let retries = 3;
+      let delay = 1000;
+      for (let i = 0; i < retries; i++) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          const result = await response.json();
+          const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+
+          if (part && part.inlineData) {
+            return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+          } else {
+            throw new Error("無有效的圖片資料返回");
+          }
+        } catch (err) {
+          if (i === retries - 1) throw err;
+          await new Promise(res => setTimeout(res, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    // Form Submit Handler
+    generateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const style = styleSelect.value;
+      const quote = customQuote.value.trim() || quotesData[selectedTheme][0];
+      const selectedRatio = document.querySelector('input[name="aspectRatio"]:checked').value;
+
+      // Construct Gemini Prompt
+      const prompt = `A serene, peaceful, and artistic spiritual illustration reflecting the Eastern concept of "Three Goodness and Four Givings" (${selectedTheme}). Visual Style: ${style}. Soft lighting, heartwarming atmosphere, lotus, gentle sun rays or peaceful nature, highly detailed, high aesthetic quality, elegant composition, non-text artistic background.`;
+
+      // Update UI for Loading
+      placeholderState.classList.add('hidden');
+      resultCard.classList.add('hidden');
+      actionBar.classList.add('hidden');
+      loadingState.classList.remove('hidden');
+      loadingState.classList.add('flex');
+      
+      statusTag.textContent = "生成中...";
+      statusTag.className = "text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full animate-pulse";
+      generateBtn.disabled = true;
+      generateBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        const imageUrl = await generateImage(prompt, selectedRatio);
+        generatedImageData = imageUrl;
+
+        // Display Generated Result
+        generatedImg.src = imageUrl;
+        cardBadge.textContent = selectedTheme;
+        cardText.textContent = `「${quote}」`;
+
+        loadingState.classList.remove('flex');
+        loadingState.classList.add('hidden');
+        resultCard.classList.remove('hidden');
+        actionBar.classList.remove('hidden');
+        actionBar.classList.add('flex');
+
+        statusTag.textContent = "生成完成";
+        statusTag.className = "text-xs text-emerald-700 font-semibold bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200";
+
+        showToast("靈感卡片已成功生成！");
+      } catch (error) {
+        console.error(error);
+        loadingState.classList.remove('flex');
+        loadingState.classList.add('hidden');
+        placeholderState.classList.remove('hidden');
+
+        statusTag.textContent = "生成失敗";
+        statusTag.className = "text-xs text-red-700 font-semibold bg-red-50 px-3 py-1 rounded-full";
+
+        showToast("生成圖片失敗，請稍微再試一次。", true);
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+
+    // Copy Quote Text
+    copyQuoteBtn.addEventListener('click', () => {
+      const quote = cardText.textContent;
+      const theme = cardBadge.textContent;
+      const fullText = `【三好四給 • ${theme}】\n${quote}\n\n身做好事 • 口說好話 • 心存好心`;
+
+      const el = document.createElement('textarea');
+      el.value = fullText;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+
+      showToast("已成功複製心靈祝福文字！");
+    });
+
+    // Download Image
+    downloadBtn.addEventListener('click', () => {
+      if (!generatedImageData) return;
+
+      const link = document.createElement('a');
+      link.href = generatedImageData;
+      link.download = `三好四給-${selectedTheme}-靜心卡.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast("圖片下載已開始！");
+    });
+  </script>
+</body>
+</html>
