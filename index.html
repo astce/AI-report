@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>三好四給 AI 靜心卡片生成器</title>
+    <title>三好四給 靜心靈感與卡片製作空間</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -57,7 +57,7 @@
             font-family: "Zen Maru Gothic", sans-serif;
         }
 
-        .flip-card {
+        .perspective-1000 {
             perspective: 1000px;
         }
 
@@ -88,16 +88,34 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 28px rgba(180, 83, 9, 0.15);
         }
+
+        .gallery-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: #FAF7F2;
+            border-radius: 8px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: #D6C7B2;
+            border-radius: 8px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-thumb:hover {
+            background: #B45309;
+        }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col justify-between">
 
     <header class="sticky top-0 z-50 border-b border-zen-border bg-[#FAF7F2]/95 backdrop-blur-md">
         <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-            <button onclick="switchTab('intro')" class="flex items-center gap-3">
+            <button onclick="switchTab('intro')" class="flex items-center gap-3 cursor-pointer">
                 <span
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-700 text-xl font-bold text-white">
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-700 text-xl font-bold text-white shadow-inner">
                     善
                 </span>
                 <span class="text-left">
@@ -107,286 +125,493 @@
             </button>
 
             <nav class="flex gap-1 sm:gap-2">
-                <button id="nav-intro" onclick="switchTab('intro')" class="nav-btn active">
+                <button id="nav-intro" onclick="switchTab('intro')"
+                    class="nav-btn active px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all text-amber-900 bg-amber-100 flex items-center gap-1 cursor-pointer">
                     <i data-lucide="home" class="h-4 w-4"></i>
                     <span>首頁介紹</span>
                 </button>
-                <button id="nav-interactive" onclick="switchTab('interactive')" class="nav-btn">
-                    <i data-lucide="compass" class="h-4 w-4"></i>
+                <button id="nav-interactive" onclick="switchTab('interactive')"
+                    class="nav-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all text-zen-muted hover:text-amber-900 hover:bg-amber-50 flex items-center gap-1 cursor-pointer border border-amber-600/30">
+                    <i data-lucide="compass" class="h-4 w-4 text-amber-600"></i>
                     <span>心靈互動</span>
                 </button>
-                <button id="nav-generator" onclick="switchTab('generator')" class="nav-btn">
-                    <i data-lucide="sparkles" class="h-4 w-4"></i>
-                    <span>AI 生成器</span>
+                <button id="nav-generator" onclick="switchTab('generator')"
+                    class="nav-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all text-zen-muted hover:text-amber-900 hover:bg-amber-50 flex items-center gap-1 cursor-pointer border border-amber-600/30">
+                    <i data-lucide="image" class="h-4 w-4 text-amber-600"></i>
+                    <span>靜心卡製作</span>
                 </button>
             </nav>
         </div>
     </header>
 
-    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 space-y-12">
 
-        <!-- 首頁 -->
-        <section id="page-intro" class="space-y-10">
+        <!-- ==================== 頁面 1：首頁介紹 (10張輪播 + 豐富下方區塊) ==================== -->
+        <section id="page-intro" class="space-y-12">
 
-            <div class="relative h-72 overflow-hidden rounded-3xl shadow-md sm:h-96">
-                <img id="hero-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400"
-                    class="absolute inset-0 h-full w-full object-cover" alt="自然風景">
-
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-
-                <div class="absolute inset-x-0 bottom-0 p-6 text-white sm:p-10">
-                    <p id="hero-label" class="mb-2 text-sm tracking-widest text-amber-200">星雲大師心靈智慧</p>
-                    <h1 id="hero-title" class="font-serif-tc text-3xl font-bold sm:text-5xl">
-                        做好事 · 說好話 · 存好心
-                    </h1>
-                    <p id="hero-description" class="mt-3 text-sm text-gray-200">
-                        將慈悲落實於日常生活，身口意皆放光明。
-                    </p>
+            <!-- 10 張金句全寬度禪意輪播 Banner -->
+            <div
+                class="relative h-72 sm:h-96 md:h-[420px] overflow-hidden rounded-3xl shadow-md group border border-zen-border">
+                <div id="banner-slides" class="w-full h-full relative">
+                    <!-- Slide 1 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-100">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">星雲大師心靈智慧
+                                (1/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">做好事 · 說好話 · 存好心</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">將慈悲落實於日常生活，身口意皆放光明。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">四給利他精神
+                                (2/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">給人信心 · 給人希望 · 給人歡喜 ·
+                                給人方便</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">用歡喜奉獻的心，照亮身邊每一個需要幫助的人。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">身做好事
+                                (3/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">日行一善，手做好事，成就好緣</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">不以善小而不為，以實際行動傳播關懷與善意。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">口說好話
+                                (4/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">良言一句三冬暖，口出善言化春風</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">常帶鼓勵與讚美，柔和慈悲的語言最能撫慰人心。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">心存好心
+                                (5/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">起心動念皆慈悲，心如明鏡不受塵</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">常懷感激、同理與祝福，心有善意天地自然寬廣。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 6 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">給人信心
+                                (6/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">給予信任與鼓勵，陪伴跨越低谷</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">看見他人的潛能，讓信心成為邁向成功的勇氣。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 7 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">給人希望
+                                (7/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">在迷茫中點亮希望，指引光明方向</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">陪伴身處困境者，讓未來重現生機與動力。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 8 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">給人歡喜
+                                (8/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">微笑是通往心靈最美的對話</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">常保歡喜熱情，將喜悅感染週遭每一個角落。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 9 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">給人方便
+                                (9/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">給人一份方便，留給自己無限廣闊</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">處處體諒他人，隨手助人結下善緣。</p>
+                        </div>
+                    </div>
+                    <!-- Slide 10 -->
+                    <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200"
+                            class="w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                            <span class="text-xs sm:text-sm font-serif-tc tracking-widest text-amber-200 mb-1">圓滿智慧
+                                (10/10)</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold font-serif-tc leading-tight">三好修身，四給利他，圓滿幸福人生</h2>
+                            <p class="text-xs sm:text-sm text-gray-200 mt-2">攜手實踐三好四給，創造和諧溫暖的人間淨土。</p>
+                        </div>
+                    </div>
                 </div>
 
-                <button onclick="previousHero()"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/40 px-4 py-2 text-2xl text-white">
-                    ‹
-                </button>
+                <!-- 左右切換按鈕 -->
+                <button onclick="prevSlide()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition cursor-pointer">‹</button>
+                <button onclick="nextSlide()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition cursor-pointer">›</button>
 
-                <button onclick="nextHero()"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/40 px-4 py-2 text-2xl text-white">
-                    ›
-                </button>
+                <!-- 10 個小圓點指示器 -->
+                <div id="dots-container" class="absolute bottom-4 right-6 flex space-x-1.5"></div>
             </div>
 
-            <div>
-                <div class="mb-5 border-l-4 border-amber-600 pl-4">
-                    <h2 class="font-serif-tc text-2xl font-bold text-amber-900">三好運動</h2>
+            <!-- 三好運動詳細區塊（解決單調問題） -->
+            <div class="space-y-6">
+                <div class="border-l-4 border-amber-600 pl-4">
+                    <h2 class="font-serif-tc text-2xl font-bold text-amber-900">三好運動（修身實踐）</h2>
                     <p class="text-sm text-zen-muted">從自身言行舉止做起，淨化個人身口意。</p>
                 </div>
 
-                <div class="grid gap-5 md:grid-cols-3">
-                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6">
+                <div class="grid gap-6 md:grid-cols-3">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
                         <div
                             class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
-                            <i data-lucide="hand-heart"></i>
+                            <i data-lucide="hand-heart" class="w-6 h-6"></i>
                         </div>
                         <h3 class="mb-2 font-serif-tc text-xl font-bold text-amber-900">做好事（身）</h3>
                         <p class="text-sm leading-7 text-zen-muted">
-                            日行一善，協助他人，用實際行動傳播溫暖與力量。
+                            日行一善，協助他人。不以善小而不為，用實際的行動傳播溫暖與力量，讓社會充滿善意循環。
                         </p>
                     </article>
 
-                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
                         <div
                             class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
-                            <i data-lucide="message-square-heart"></i>
+                            <i data-lucide="message-square-heart" class="w-6 h-6"></i>
                         </div>
                         <h3 class="mb-2 font-serif-tc text-xl font-bold text-amber-900">說好話（口）</h3>
                         <p class="text-sm leading-7 text-zen-muted">
-                            常帶鼓勵與讚美，用柔和慈悲的語言撫慰人心。
+                            口出善言，常帶鼓勵與讚美。用柔和慈悲的語言取代批評，為身邊的人帶來安寧與勇氣。
                         </p>
                     </article>
 
-                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
                         <div
                             class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
-                            <i data-lucide="heart"></i>
+                            <i data-lucide="heart" class="w-6 h-6"></i>
                         </div>
                         <h3 class="mb-2 font-serif-tc text-xl font-bold text-amber-900">存好心（意）</h3>
                         <p class="text-sm leading-7 text-zen-muted">
-                            常懷感激、同理與祝福之心，讓心靈保持祥和。
+                            起心動念皆具慈悲包容。常懷感激、同理與祝福之心，滋養心靈品質，讓內心保持平和。
                         </p>
                     </article>
                 </div>
             </div>
 
-            <div>
-                <div class="mb-5 border-l-4 border-amber-600 pl-4">
-                    <h2 class="font-serif-tc text-2xl font-bold text-amber-900">四給精神</h2>
+            <!-- 四給精神詳細區塊 -->
+            <div class="space-y-6">
+                <div class="border-l-4 border-amber-600 pl-4">
+                    <h2 class="font-serif-tc text-2xl font-bold text-amber-900">四給精神（利他實踐）</h2>
                     <p class="text-sm text-zen-muted">以歡喜奉獻的心，給予他人撫慰與幫助。</p>
                 </div>
 
-                <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                    <article class="rounded-2xl border border-zen-border bg-white p-5">
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
+                        <div
+                            class="w-10 h-10 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center mb-3">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
                         <h3 class="mb-2 font-serif-tc text-lg font-bold text-amber-900">給人信心</h3>
-                        <p class="text-sm leading-6 text-zen-muted">給予鼓勵與信任，幫助他人在挫折中看見希望。</p>
+                        <p class="text-sm leading-6 text-zen-muted">給予鼓勵與信任，幫助他人在挫折中看見希望與力量。</p>
                     </article>
 
-                    <article class="rounded-2xl border border-zen-border bg-white p-5">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
+                        <div
+                            class="w-10 h-10 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center mb-3">
+                            <i data-lucide="sun" class="w-5 h-5"></i>
+                        </div>
                         <h3 class="mb-2 font-serif-tc text-lg font-bold text-amber-900">給人希望</h3>
-                        <p class="text-sm leading-6 text-zen-muted">指引正向方向，重新找回勇氣與力量。</p>
+                        <p class="text-sm leading-6 text-zen-muted">指引正向方向，重新找回面對未來挑戰的勇氣。</p>
                     </article>
 
-                    <article class="rounded-2xl border border-zen-border bg-white p-5">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
+                        <div
+                            class="w-10 h-10 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center mb-3">
+                            <i data-lucide="smile" class="w-5 h-5"></i>
+                        </div>
                         <h3 class="mb-2 font-serif-tc text-lg font-bold text-amber-900">給人歡喜</h3>
-                        <p class="text-sm leading-6 text-zen-muted">常保微笑與熱情，將喜悅感染身邊的人。</p>
+                        <p class="text-sm leading-6 text-zen-muted">常保微笑與熱情，將喜悅感染身邊每一個角落。</p>
                     </article>
 
-                    <article class="rounded-2xl border border-zen-border bg-white p-5">
+                    <article class="card-hover rounded-2xl border border-zen-border bg-white p-6 shadow-sm">
+                        <div
+                            class="w-10 h-10 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center mb-3">
+                            <i data-lucide="sparkle" class="w-5 h-5"></i>
+                        </div>
                         <h3 class="mb-2 font-serif-tc text-lg font-bold text-amber-900">給人方便</h3>
-                        <p class="text-sm leading-6 text-zen-muted">體諒他人處境，處處伸出援手與提供協助。</p>
+                        <p class="text-sm leading-6 text-zen-muted">體諒他人處境，處處伸出援手與提供生活上的便利。</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- 心靈互動 -->
-        <section id="page-interactive" class="hidden space-y-10">
+        <!-- ==================== 頁面 2：心靈互動 (修復抽籤點擊與豐富實踐指南) ==================== -->
+        <section id="page-interactive" class="hidden space-y-12">
+            <!-- 3D 抽靈感籤 -->
             <div
-                class="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-100/70 to-amber-50 p-8 text-center">
-                <span class="rounded-full bg-amber-200 px-3 py-1 text-xs font-bold text-amber-900">
-                    每日靜心
-                </span>
+                class="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-100/70 to-amber-50 p-8 text-center space-y-6">
+                <div>
+                    <span class="rounded-full bg-amber-200 px-3 py-1 text-xs font-bold text-amber-900">每日靜心</span>
+                    <h2 class="mt-2 font-serif-tc text-3xl font-bold text-amber-950">3D 抽今日心靈靈感籤</h2>
+                    <p class="mt-1 text-sm text-zen-muted">靜心一秒，點擊下方卡片翻牌揭曉屬您的三好四給指引。</p>
+                </div>
 
-                <h2 class="mt-4 font-serif-tc text-3xl font-bold text-amber-950">
-                    抽今日心靈靈感籤
-                </h2>
-
-                <p class="mt-2 text-sm text-zen-muted">
-                    點擊卡片，看看今天的三好四給提醒。
-                </p>
-
-                <div class="mx-auto mt-8 w-64 flip-card">
-                    <div id="fortune-card" onclick="drawFortune()" class="flip-card-inner relative h-80 cursor-pointer">
-                        <div
-                            class="flip-card-front absolute inset-0 flex flex-col items-center justify-center rounded-2xl border-4 border-amber-600 bg-amber-800 p-6 text-amber-100 shadow-xl">
+                <div class="flex justify-center items-center perspective-1000 py-2">
+                    <div id="fortune-card" onclick="drawFortune()" class="flip-card w-64 h-80 cursor-pointer">
+                        <div class="flip-card-inner relative w-full h-full shadow-xl rounded-2xl">
+                            <!-- 正面 -->
                             <div
-                                class="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-amber-400 bg-amber-700 text-2xl font-bold">
-                                籤
+                                class="flip-card-front absolute inset-0 bg-amber-800 text-amber-100 rounded-2xl p-6 flex flex-col items-center justify-center border-4 border-amber-600">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-amber-700 flex items-center justify-center text-2xl font-bold font-serif-tc border border-amber-400 mb-4 shadow-inner">
+                                    籤</div>
+                                <h4 class="text-lg font-bold font-serif-tc tracking-widest">三好四給靈感籤</h4>
+                                <p class="text-xs text-amber-300 mt-2">點擊卡片 翻牌揭曉</p>
                             </div>
-                            <strong class="font-serif-tc tracking-widest">三好四給靈感籤</strong>
-                            <small class="mt-2 text-amber-300">點擊卡片翻牌</small>
-                        </div>
-
-                        <div
-                            class="flip-card-back absolute inset-0 flex flex-col items-center justify-between rounded-2xl border-4 border-amber-500 bg-white p-6 text-amber-900 shadow-xl">
-                            <span id="fortune-tag"
-                                class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold">做好事</span>
-                            <p id="fortune-text" class="font-serif-tc text-base font-semibold leading-8">
-                                今天主動幫助身邊的人，讓善意繼續傳遞。
-                            </p>
-                            <small class="text-zen-muted">—— 祝福您吉祥平安</small>
+                            <!-- 背面 -->
+                            <div
+                                class="flip-card-back absolute inset-0 bg-white text-amber-900 rounded-2xl p-6 flex flex-col items-center justify-between border-4 border-amber-500 shadow-md">
+                                <span id="fortune-tag"
+                                    class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">做好事</span>
+                                <p id="fortune-text" class="font-serif-tc text-base font-semibold leading-relaxed">
+                                    今天主動幫同儕或同事一個忙，讓溫暖傳遞下去。</p>
+                                <span class="text-xs text-zen-muted">—— 祝福您吉祥平安</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <button onclick="drawFortune()"
-                    class="mt-7 rounded-xl bg-amber-800 px-6 py-3 text-sm font-medium text-white hover:bg-amber-900">
+                    class="rounded-xl bg-amber-800 px-6 py-2.5 text-sm font-medium text-white hover:bg-amber-900 transition cursor-pointer shadow">
                     再抽一張靈感籤
                 </button>
             </div>
 
-            <div>
-                <div class="mb-5 border-l-4 border-amber-600 pl-4">
+            <!-- 生活實踐指南（豐富內容，解決下方太少的問題） -->
+            <div class="space-y-6">
+                <div class="border-l-4 border-amber-600 pl-4">
                     <h2 class="font-serif-tc text-2xl font-bold text-amber-900">生活實踐指南</h2>
-                    <p class="text-sm text-zen-muted">切換不同生活情境，查看實踐範例。</p>
+                    <p class="text-sm text-zen-muted">點擊切換不同生活情境，查看具體落實範例。</p>
                 </div>
 
-                <div class="mb-5 flex flex-wrap gap-2">
-                    <button onclick="switchScenario('school')" class="scenario-btn active"
+                <div class="flex flex-wrap gap-2 border-b border-zen-border pb-3">
+                    <button onclick="switchScenario('school')"
+                        class="scenario-btn px-4 py-2 rounded-xl text-sm font-medium bg-amber-800 text-white cursor-pointer"
                         id="scenario-school">學校同儕</button>
-                    <button onclick="switchScenario('work')" class="scenario-btn" id="scenario-work">職場工作</button>
-                    <button onclick="switchScenario('family')" class="scenario-btn" id="scenario-family">家庭生活</button>
-                    <button onclick="switchScenario('social')" class="scenario-btn" id="scenario-social">日常社會</button>
+                    <button onclick="switchScenario('work')"
+                        class="scenario-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-zen-muted border border-zen-border cursor-pointer"
+                        id="scenario-work">職場工作</button>
+                    <button onclick="switchScenario('family')"
+                        class="scenario-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-zen-muted border border-zen-border cursor-pointer"
+                        id="scenario-family">家庭生活</button>
+                    <button onclick="switchScenario('social')"
+                        class="scenario-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-zen-muted border border-zen-border cursor-pointer"
+                        id="scenario-social">日常社會</button>
                 </div>
 
                 <div id="scenario-content" class="grid gap-4 md:grid-cols-2"></div>
             </div>
         </section>
 
-        <!-- AI 生成器 -->
+        <!-- ==================== 頁面 3：靜心卡製作 (內建40張隨機圖庫 + 三好四給提示詞) ==================== -->
         <section id="page-generator" class="hidden space-y-6">
-            <div class="border-b border-zen-border pb-4">
-                <h2 class="font-serif-tc text-2xl font-bold text-amber-950">
-                    AI 靜心圖文卡片生成器
-                </h2>
-                <p class="mt-2 text-sm text-zen-muted">
-                    選擇主題與風格，生成一張溫暖正向的 AI 圖片。
-                </p>
+            <div
+                class="border-b border-zen-border pb-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                <div>
+                    <h2 class="font-serif-tc text-2xl font-bold text-amber-950">三好四給 · 靜心圖文卡片製作</h2>
+                    <p class="mt-1 text-sm text-zen-muted">從 40 張精選底圖中挑選或隨機抽換，並利用三好四給提示詞快速製作祝福卡片。</p>
+                </div>
+                <span
+                    class="text-xs font-medium text-amber-800 bg-amber-100 px-3 py-1 rounded-full self-start sm:self-auto">
+                    目前選擇：第 <span id="selected-index-label">1</span> / 40 張
+                </span>
             </div>
 
             <div class="grid items-start gap-8 lg:grid-cols-12">
-                <div class="space-y-5 rounded-2xl border border-zen-border bg-white p-6 lg:col-span-5">
+                <!-- 左側控制面板 -->
+                <div class="space-y-5 rounded-2xl border border-zen-border bg-white p-6 lg:col-span-6 shadow-sm">
 
+                    <!-- 1. 選擇背景照片（40張） -->
                     <div>
-                        <label class="mb-2 block text-sm font-bold text-amber-800">1. 選擇心靈主題</label>
-                        <select id="theme-select" onchange="updateQuote()"
-                            class="w-full rounded-xl border border-zen-border bg-[#FAF7F2] px-3 py-3 text-sm">
-                            <option value="做好事">做好事</option>
-                            <option value="說好話">說好話</option>
-                            <option value="存好心">存好心</option>
-                            <option value="給人信心">給人信心</option>
-                            <option value="給人希望">給人希望</option>
-                            <option value="給人歡喜">給人歡喜</option>
-                            <option value="給人方便">給人方便</option>
-                        </select>
+                        <div class="mb-2 flex items-center justify-between">
+                            <label class="text-sm font-bold text-amber-800">1. 選擇背景照片（共 40 張）</label>
+                            <button onclick="pickRandomPhoto()" type="button"
+                                class="text-xs font-medium text-amber-700 hover:text-amber-900 flex items-center gap-1 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 cursor-pointer">
+                                <i data-lucide="shuffle" class="h-3.5 w-3.5"></i>
+                                <span>隨機選一張</span>
+                            </button>
+                        </div>
+
+                        <!-- 縮圖網格容器 -->
+                        <div id="photo-grid"
+                            class="gallery-scroll grid grid-cols-5 sm:grid-cols-6 gap-2 max-h-48 overflow-y-auto rounded-xl border border-zen-border bg-[#FAF7F2] p-2.5">
+                            <!-- JS 動態渲染 40 張縮圖 -->
+                        </div>
                     </div>
 
+                    <!-- 2. 三好四給提示詞與金句快速帶入 -->
                     <div>
-                        <label class="mb-2 block text-sm font-bold text-amber-800">2. 選擇圖片風格</label>
-                        <select id="style-select"
-                            class="w-full rounded-xl border border-zen-border bg-[#FAF7F2] px-3 py-3 text-sm">
-                            <option value="oriental zen ink painting style">東方水墨禪意</option>
-                            <option value="warm wholesome storybook illustration">溫暖插畫繪本</option>
-                            <option value="minimalist zen aesthetic photography">極簡美學畫廊</option>
-                            <option value="soft dreamy watercolor painting">柔和水彩光影</option>
-                        </select>
-                    </div>
+                        <div class="mb-2 flex items-center justify-between">
+                            <label class="text-sm font-bold text-amber-800">2. 三好四給提示詞與金句</label>
+                            <span class="text-xs text-zen-muted">點擊標籤快速套用靈感</span>
+                        </div>
 
-                    <div>
-                        <label class="mb-2 block text-sm font-bold text-amber-800">3. 編輯心靈金句</label>
+                        <!-- 七大主題快速標籤按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mb-2.5">
+                            <button type="button" onclick="applyPromptTag('做好事')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">做好事</button>
+                            <button type="button" onclick="applyPromptTag('說好話')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">說好話</button>
+                            <button type="button" onclick="applyPromptTag('存好心')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">存好心</button>
+                            <button type="button" onclick="applyPromptTag('給人信心')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">給人信心</button>
+                            <button type="button" onclick="applyPromptTag('給人希望')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">給人希望</button>
+                            <button type="button" onclick="applyPromptTag('給人歡喜')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">給人歡喜</button>
+                            <button type="button" onclick="applyPromptTag('給人方便')"
+                                class="text-xs px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg font-medium transition cursor-pointer">給人方便</button>
+                        </div>
+
                         <textarea id="quote-input" rows="3" oninput="updatePreviewText()"
-                            class="w-full rounded-xl border border-zen-border bg-[#FAF7F2] p-3 text-sm"></textarea>
+                            placeholder="寫下今天想實踐的『三好』小事，或送給朋友的一句『四給』祝福⋯⋯"
+                            class="w-full rounded-xl border border-zen-border bg-[#FAF7F2] p-3 text-sm focus:border-amber-600 focus:outline-none">做好事：心存善念，口出善言，身行善事。</textarea>
                     </div>
 
-                    <div>
-                        <label class="mb-2 block text-sm font-bold text-amber-800">4. 文字設定</label>
+                    <!-- 3. 文字樣式與顏色設定 -->
+                    <div class="space-y-4 border-t border-zen-border pt-4">
+                        <label class="block text-sm font-bold text-amber-800">3. 字形與顏色設定</label>
 
-                        <select id="font-select" onchange="updatePreviewText()"
-                            class="mb-3 w-full rounded-lg border border-zen-border bg-[#FAF7F2] px-3 py-2 text-sm">
-                            <option value="Ma Shan Zheng">書法體</option>
-                            <option value="Noto Serif TC">經典明體</option>
-                            <option value="Zen Maru Gothic">溫柔圓體</option>
-                            <option value="Noto Sans TC">現代黑體</option>
-                        </select>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <span class="mb-1 block text-xs text-zen-muted">選擇字形</span>
+                                <select id="font-select" onchange="updatePreviewText()"
+                                    class="w-full rounded-lg border border-zen-border bg-[#FAF7F2] px-3 py-2 text-sm focus:border-amber-600 focus:outline-none">
+                                    <option value="Ma Shan Zheng">書法毛筆體</option>
+                                    <option value="Noto Serif TC">經典明體（優雅）</option>
+                                    <option value="Zen Maru Gothic">溫柔圓體（親切）</option>
+                                    <option value="Noto Sans TC">現代黑體（清晰）</option>
+                                </select>
+                            </div>
 
-                        <div class="mb-3 flex items-center gap-3">
-                            <input id="color-input" type="color" value="#FFFFFF" onchange="updatePreviewText()"
-                                class="h-9 w-12 cursor-pointer">
-                            <span class="text-sm text-zen-muted">文字顏色</span>
+                            <div>
+                                <span class="mb-1 block text-xs text-zen-muted">文字垂直位置</span>
+                                <select id="align-select" onchange="updatePreviewText()"
+                                    class="w-full rounded-lg border border-zen-border bg-[#FAF7F2] px-3 py-2 text-sm focus:border-amber-600 focus:outline-none">
+                                    <option value="center">畫面正中央</option>
+                                    <option value="top">偏靠上方</option>
+                                    <option value="bottom">偏靠下方</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div>
-                            <div class="mb-1 flex justify-between text-sm text-zen-muted">
-                                <span>文字大小</span>
-                                <span id="font-size-label">28px</span>
+                            <span class="mb-1.5 block text-xs text-zen-muted">字的顏色</span>
+                            <div class="flex flex-wrap items-center gap-2.5">
+                                <input id="color-input" type="color" value="#FFFFFF" oninput="updatePreviewText()"
+                                    class="h-9 w-12 cursor-pointer rounded border border-zen-border bg-white p-0.5">
+                                <div class="flex items-center gap-1.5">
+                                    <button type="button" onclick="setTextColor('#FFFFFF')" title="純淨白"
+                                        class="h-7 w-7 rounded-full border border-gray-300 bg-white shadow-sm hover:scale-110 transition cursor-pointer"></button>
+                                    <button type="button" onclick="setTextColor('#FEF3C7')" title="暖金米"
+                                        class="h-7 w-7 rounded-full border border-amber-300 bg-amber-100 shadow-sm hover:scale-110 transition cursor-pointer"></button>
+                                    <button type="button" onclick="setTextColor('#FBBF24')" title="亮琥珀"
+                                        class="h-7 w-7 rounded-full border border-amber-500 bg-amber-400 shadow-sm hover:scale-110 transition cursor-pointer"></button>
+                                    <button type="button" onclick="setTextColor('#2C2A29')" title="墨韻黑"
+                                        class="h-7 w-7 rounded-full border border-gray-700 bg-[#2C2A29] shadow-sm hover:scale-110 transition cursor-pointer"></button>
+                                    <button type="button" onclick="setTextColor('#78350F')" title="沉穩褐"
+                                        class="h-7 w-7 rounded-full border border-amber-950 bg-amber-900 shadow-sm hover:scale-110 transition cursor-pointer"></button>
+                                    <button type="button" onclick="setTextColor('#991B1B')" title="朱砂紅"
+                                        class="h-7 w-7 rounded-full border border-red-900 bg-red-800 shadow-sm hover:scale-110 transition cursor-pointer"></button>
+                                </div>
                             </div>
-                            <input id="font-size-input" type="range" min="16" max="48" value="28"
-                                oninput="updatePreviewText()" class="w-full accent-amber-700">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <div class="mb-1 flex justify-between text-xs text-zen-muted">
+                                    <span>文字大小</span>
+                                    <span id="font-size-label">30px</span>
+                                </div>
+                                <input id="font-size-input" type="range" min="18" max="52" value="30"
+                                    oninput="updatePreviewText()" class="w-full accent-amber-700">
+                            </div>
+
+                            <div>
+                                <div class="mb-1 flex justify-between text-xs text-zen-muted">
+                                    <span>背景暗角遮罩</span>
+                                    <span id="overlay-label">35%</span>
+                                </div>
+                                <input id="overlay-input" type="range" min="0" max="75" value="35"
+                                    oninput="updatePreviewText()" class="w-full accent-amber-700">
+                            </div>
                         </div>
                     </div>
 
-                    <button id="generate-button" onclick="generateImage()"
-                        class="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-800 py-3 font-medium text-white shadow hover:bg-amber-900 disabled:cursor-not-allowed">
-                        <i data-lucide="wand-2" class="h-5 w-5"></i>
-                        <span>生成純淨正能量 AI 圖片</span>
-                    </button>
+                    <!-- 4. 下載按鈕 -->
+                    <div class="pt-2">
+                        <button id="download-button" onclick="downloadCardImage()" type="button"
+                            class="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-800 py-3.5 font-medium text-white shadow-md hover:bg-amber-900 transition cursor-pointer">
+                            <i data-lucide="download" class="h-5 w-5"></i>
+                            <span>下載合成好的靜心卡片 (PNG)</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="lg:col-span-7">
+                <!-- 右側即時預覽與下載區 -->
+                <div class="lg:col-span-6">
                     <div class="rounded-2xl border border-zen-border bg-white p-4 shadow-sm">
-                        <div id="preview-area" class="relative aspect-[4/5] overflow-hidden rounded-xl bg-[#eee8df]">
-                            <img id="preview-image"
-                                src="https://image.pollinations.ai/prompt/pure%20wholesome%20act%20of%20kindness%20warm%20golden%20light%20oriental%20zen%20ink%20painting?width=800&height=1000&nologo=true"
-                                class="absolute inset-0 h-full w-full object-cover" alt="AI 生成圖片">
+                        <div class="mb-2.5 flex items-center justify-between text-xs text-zen-muted">
+                            <span class="font-bold uppercase tracking-wider">即時卡片預覽</span>
+                            <span id="photo-title-badge" class="text-amber-800 font-medium">第 1 張 · 做好事</span>
+                        </div>
 
-                            <div class="absolute inset-0 bg-black/40"></div>
-
-                            <div
+                        <div id="preview-area"
+                            class="relative aspect-[4/5] overflow-hidden rounded-xl bg-[#eee8df] shadow-inner">
+                            <img id="preview-image" crossorigin="anonymous" src=""
+                                class="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
+                                alt="卡片背景">
+                            <div id="preview-overlay" class="absolute inset-0 bg-black/35 transition-all"></div>
+                            <div id="preview-text-box"
                                 class="relative z-10 flex h-full flex-col items-center justify-center px-8 text-center">
                                 <p id="preview-text"
-                                    class="font-calligraphy text-3xl leading-relaxed text-white drop-shadow-lg">
+                                    class="font-calligraphy text-3xl leading-relaxed text-white drop-shadow-lg whitespace-pre-line">
                                     做好事：心存善念，口出善言，身行善事。
                                 </p>
-                                <span
-                                    class="mt-5 border-t border-amber-200/50 pt-2 text-xs tracking-widest text-amber-100">
+                                <span id="preview-footer-tag"
+                                    class="mt-5 border-t border-amber-200/60 pt-2 text-xs tracking-widest text-amber-100 drop-shadow">
                                     —— 三好四給 · 心靈卡片
                                 </span>
                             </div>
@@ -398,6 +623,8 @@
 
     </main>
 
+    <canvas id="export-canvas" class="hidden"></canvas>
+
     <footer class="border-t border-zen-border bg-white py-6 text-center text-xs text-zen-muted">
         三好四給心靈空間 · 做好事 · 說好話 · 存好心
     </footer>
@@ -405,624 +632,315 @@
     <script>
         lucide.createIcons();
 
-        const COOLDOWN_TIME = 45 * 1000;
-        const COOLDOWN_KEY = "three-good-four-give-cooldown";
-
-        let cooldownInterval = null;
-        let gameAnimation = null;
-        let gameState = null;
-        let resizeHandler = null;
-
-        const heroSlides = [
-            {
-                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400",
-                label: "星雲大師心靈智慧",
-                title: "做好事 · 說好話 · 存好心",
-                description: "將慈悲落實於日常生活，身口意皆放光明。"
-            },
-            {
-                image: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1400",
-                label: "四給利他精神",
-                title: "給人信心 · 給人希望 · 給人歡喜 · 給人方便",
-                description: "用歡喜奉獻的心，照亮身邊每一個需要幫助的人。"
-            },
-            {
-                image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1400",
-                label: "身做好事",
-                title: "日行一善，手做好事，成就好緣",
-                description: "不以善小而不為，以實際行動傳播關懷與善意。"
-            },
-            {
-                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1400",
-                label: "圓滿智慧",
-                title: "三好修身，四給利他，圓滿幸福人生",
-                description: "攜手實踐三好四給，創造和諧溫暖的人間淨土。"
-            }
+        // ==========================================
+        // 40 張內建背景圖庫設定（您可以隨時替換成您的圖片網址或檔案路徑）
+        // ==========================================
+        const samplePhotos = [
+            // 1-10 做好事系列
+            { url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000", theme: "做好事", name: "晨光山水" },
+            { url: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1000", theme: "做好事", name: "清幽竹林" },
+            { url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000", theme: "做好事", name: "森林晨曦" },
+            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000", theme: "做好事", name: "高山流水" },
+            { url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1000", theme: "做好事", name: "綠意盎然" },
+            { url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1000", theme: "做好事", name: "群山雲海" },
+            // 7-12 說好話系列
+            { url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000", theme: "說好話", name: "靜謐湖畔" },
+            { url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000", theme: "說好話", name: "遼闊草原" },
+            { url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1000", theme: "說好話", name: "山林小徑" },
+            { url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000", theme: "說好話", name: "陽光灑落" },
+            { url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1000", theme: "說好話", name: "雲霧山巒" },
+            { url: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1000", theme: "說好話", name: "禪意竹影" },
+            // 13-18 存好心系列
+            { url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000", theme: "存好心", name: "日出曙光" },
+            { url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000", theme: "存好心", name: "海天一色" },
+            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000", theme: "存好心", name: "溪流潺潺" },
+            { url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1000", theme: "存好心", name: "芬多精森" },
+            { url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000", theme: "存好心", name: "鏡面湖泊" },
+            { url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000", theme: "存好心", name: "晴空萬里" },
+            // 19-25 給人信心系列
+            { url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1000", theme: "給人信心", name: "山巔遠眺" },
+            { url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000", theme: "給人信心", name: "金色陽光" },
+            { url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000", theme: "給人信心", name: "海岸微風" },
+            { url: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1000", theme: "給人信心", name: "翠綠山林" },
+            { url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000", theme: "給人信心", name: "晨曦微露" },
+            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000", theme: "給人信心", name: "壯闊山脈" },
+            // 26-31 給人希望系列
+            { url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1000", theme: "給人希望", name: "生機盎然" },
+            { url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1000", theme: "給人希望", name: "雲端之上" },
+            { url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000", theme: "給人希望", name: "平静水面" },
+            { url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000", theme: "給人希望", name: "青翠草地" },
+            { url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1000", theme: "給人希望", name: "林間小徑" },
+            { url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000", theme: "給人希望", name: "曙光乍現" },
+            // 32-36 給人歡喜系列
+            { url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000", theme: "給人歡喜", name: "蔚藍海岸" },
+            { url: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1000", theme: "給人歡喜", name: "竹林微風" },
+            { url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000", theme: "給人歡喜", name: "晨光山野" },
+            { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000", theme: "給人歡喜", name: "清澈溪谷" },
+            { url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1000", theme: "給人歡喜", name: "茂密綠林" },
+            // 37-40 給人方便系列
+            { url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1000", theme: "給人方便", name: "山巒層疊" },
+            { url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000", theme: "給人方便", name: "寧靜湖畔" },
+            { url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000", theme: "給人方便", name: "和平原野" },
+            { url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1000", theme: "給人方便", name: "祥和山徑" }
         ];
 
-        let heroIndex = 0;
+        let selectedPhotoIndex = 0;
 
-        function updateHero() {
-            const slide = heroSlides[heroIndex];
+        // 三好四給提示詞與金句庫
+        const promptLibrary = {
+            "做好事": "做好事：心存善念，口出善言，身行善事。",
+            "說好話": "說好話：良言一句三冬暖，口出善言化春風。",
+            "存好心": "存好心：起心動念皆慈悲，心如明鏡不受塵。",
+            "給人信心": "給人信心：給予信任與鼓勵，陪伴跨越低谷。",
+            "給人希望": "給人希望：在迷茫中點亮希望，指引光明方向。",
+            "給人歡喜": "給人歡喜：常保微笑與熱情，將喜悅感染身邊的人。",
+            "給人方便": "給人方便：給人一份方便，留給自己無限廣闊。"
+        };
 
-            document.getElementById("hero-image").src = slide.image;
-            document.getElementById("hero-label").textContent = slide.label;
-            document.getElementById("hero-title").textContent = slide.title;
-            document.getElementById("hero-description").textContent = slide.description;
+        function applyPromptTag(themeName) {
+            const quoteInput = document.getElementById("quote-input");
+            quoteInput.value = promptLibrary[themeName] || `${themeName}：心存善念，造福人群。`;
+            updatePreviewText();
         }
 
-        function nextHero() {
-            heroIndex = (heroIndex + 1) % heroSlides.length;
-            updateHero();
+        // 初始化 40 張縮圖網格
+        function initPhotoGrid() {
+            const grid = document.getElementById("photo-grid");
+            grid.innerHTML = "";
+
+            samplePhotos.forEach((photo, index) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = `relative aspect-square overflow-hidden rounded-lg border-2 transition hover:opacity-100 cursor-pointer ${index === selectedPhotoIndex ? 'border-amber-700 ring-2 ring-amber-700/30 opacity-100 scale-95' : 'border-transparent opacity-70 hover:scale-105'}`;
+                btn.title = `第 ${index + 1} 張: ${photo.name} (${photo.theme})`;
+                btn.onclick = () => selectPhoto(index);
+
+                const img = document.createElement("img");
+                img.src = photo.url;
+                img.className = "h-full w-full object-cover";
+                btn.appendChild(img);
+
+                grid.appendChild(btn);
+            });
         }
 
-        function previousHero() {
-            heroIndex = (heroIndex - 1 + heroSlides.length) % heroSlides.length;
-            updateHero();
+        function selectPhoto(index) {
+            selectedPhotoIndex = index;
+            const photo = samplePhotos[index];
+
+            document.getElementById("preview-image").src = photo.url;
+            document.getElementById("selected-index-label").textContent = index + 1;
+            document.getElementById("photo-title-badge").textContent = `第 ${index + 1} 張 · ${photo.theme} (${photo.name})`;
+
+            initPhotoGrid();
         }
 
-        setInterval(nextHero, 6000);
+        function pickRandomPhoto() {
+            const randomIndex = Math.floor(Math.random() * samplePhotos.length);
+            selectPhoto(randomIndex);
+        }
 
+        // 10 張圖片輪播邏輯
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('#banner-slides .slide');
+        const dotsContainer = document.getElementById('dots-container');
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = `w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full cursor-pointer transition ${i === 0 ? 'bg-white scale-125' : 'bg-white/40'}`;
+            dot.onclick = () => setSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.style.opacity = (i === index) ? '1' : '0'; });
+            const dots = dotsContainer.children;
+            Array.from(dots).forEach((dot, i) => {
+                dot.className = `w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full cursor-pointer transition ${i === index ? 'bg-white scale-125' : 'bg-white/40'}`;
+            });
+            currentSlideIndex = index;
+        }
+        function nextSlide() { showSlide((currentSlideIndex + 1) % slides.length); }
+        function prevSlide() { showSlide((currentSlideIndex - 1 + slides.length) % slides.length); }
+        function setSlide(i) { showSlide(i); }
+        setInterval(nextSlide, 5000);
+
+        // 頁面切換控制
         function switchTab(tab) {
             const pages = {
                 intro: document.getElementById("page-intro"),
                 interactive: document.getElementById("page-interactive"),
                 generator: document.getElementById("page-generator")
             };
-
             Object.values(pages).forEach(page => page.classList.add("hidden"));
-
             document.querySelectorAll(".nav-btn").forEach(button => {
-                button.classList.remove("active");
+                button.className = "nav-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all text-zen-muted hover:text-amber-900 hover:bg-amber-50 flex items-center gap-1 cursor-pointer border border-amber-600/30";
             });
 
             pages[tab].classList.remove("hidden");
-            document.getElementById(`nav-${tab}`).classList.add("active");
+            const activeBtn = document.getElementById(`nav-${tab}`);
+            activeBtn.className = "nav-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all text-amber-900 bg-amber-100 flex items-center gap-1 cursor-pointer";
 
             if (tab === "generator") {
                 updatePreviewText();
             }
         }
 
-        const fortunes = [
-            ["做好事", "今天主動幫助身邊的人，讓善意繼續傳遞。"],
-            ["說好話", "今天給予一個真誠的讚美，為他人帶來溫暖。"],
-            ["存好心", "遇到事情先深呼吸，用包容取代衝動。"],
-            ["給人信心", "給正在努力的人一句鼓勵，讓他更有力量。"],
-            ["給人希望", "分享正向的消息，讓身邊的人看見光明。"],
-            ["給人歡喜", "保持微笑，為周圍帶來輕鬆與喜悅。"],
-            ["給人方便", "主動替他人多想一步，讓事情更順利。"]
+        // 3D 抽靈感籤 (修復點擊翻牌)
+        const FORTUNES = [
+            { tag: '做好事', text: '今天在學校或職場主動幫同儕一個忙，讓善意循環。' },
+            { tag: '說好話', text: '向今天遇到的第一個人給予誠摯的讚美與微笑。' },
+            { tag: '存好心', text: '遇事時先冷靜三秒，用包容取代衝動與指責。' },
+            { tag: '給人信心', text: '給予正在努力的朋友一句堅定的鼓勵。' },
+            { tag: '給人希望', text: '分享一件正向美好的事情，感染身邊的人。' },
+            { tag: '給人歡喜', text: '保持開朗笑容，為團隊帶來輕鬆和樂的氛圍。' },
+            { tag: '給人方便', text: '隨手保持公用空間整潔，體諒下一個使用的人。' }
         ];
 
         function drawFortune() {
-            const card = document.getElementById("fortune-card");
-            card.classList.toggle("flipped");
-
-            if (card.classList.contains("flipped")) {
-                const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-                document.getElementById("fortune-tag").textContent = fortune[0];
-                document.getElementById("fortune-text").textContent = fortune[1];
+            const card = document.getElementById('fortune-card');
+            card.classList.toggle('flipped');
+            if (card.classList.contains('flipped')) {
+                const random = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+                document.getElementById('fortune-tag').innerText = random.tag;
+                document.getElementById('fortune-text').innerText = random.text;
             }
         }
 
-        const scenarios = {
+        // 生活實踐指南
+        const SCENARIOS = {
             school: [
-                ["給人方便", "分組報告時主動協助統整工作，為組員減輕負擔。"],
-                ["說好話", "看見同學發表想法時，先給予肯定與鼓勵。"]
+                { title: '給人方便', desc: '分組報告時主動承擔統整工作，為組員減輕負擔。' },
+                { title: '說好話', desc: '看見同學發表想法，不批評並給予讚賞與肯定。' }
             ],
             work: [
-                ["給人信心", "同事遇到難關時，告訴他：「我們一起想辦法。」"],
-                ["做好事", "主動整理會議室或補充公共用品。"]
+                { title: '給人信心', desc: '當同事面臨難關時，鼓勵「我們一起想辦法解決」。' },
+                { title: '做好事', desc: '主動清潔會議室或補充公共物資，體貼團隊。' }
             ],
             family: [
-                ["給人歡喜", "回家時帶著微笑向家人問候。"],
-                ["存好心", "體諒家人的辛勞，多一份包容，少一份抱怨。"]
+                { title: '給人歡喜', desc: '回家時帶著微笑向家人道一聲溫暖問候。' },
+                { title: '存好心', desc: '體諒家人的辛勞，多一份包容少一份抱怨。' }
             ],
             social: [
-                ["給人方便", "搭乘大眾運輸時主動讓座或協助扶門。"],
-                ["做好事", "順手撿起垃圾，維護公共環境。"]
+                { title: '給人方便', desc: '搭乘大眾運輸時主動讓座或幫忙扶門。' },
+                { title: '做好事', desc: '順手撿起地上的垃圾，隨手維護環境美好。' }
             ]
         };
 
-        function switchScenario(name) {
-            document.querySelectorAll(".scenario-btn").forEach(button => {
-                button.classList.remove("active");
+        function switchScenario(scen) {
+            const buttons = document.querySelectorAll('.scenario-btn');
+            buttons.forEach(btn => {
+                btn.className = "scenario-btn px-4 py-2 rounded-xl text-sm font-medium bg-white text-zen-muted border border-zen-border cursor-pointer";
             });
+            document.getElementById(`scenario-${scen}`).className = "scenario-btn px-4 py-2 rounded-xl text-sm font-medium bg-amber-800 text-white cursor-pointer";
 
-            document.getElementById(`scenario-${name}`).classList.add("active");
-
-            document.getElementById("scenario-content").innerHTML = scenarios[name]
-                .map(item => `
-          <article class="rounded-2xl border border-zen-border bg-white p-5 shadow-sm">
-            <span class="rounded-md bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
-              ${item[0]}
-            </span>
-            <p class="mt-3 text-sm leading-7 text-zen-text">${item[1]}</p>
-          </article>
-        `)
-                .join("");
+            const data = SCENARIOS[scen] || [];
+            document.getElementById('scenario-content').innerHTML = data.map(item => `
+                <article class="rounded-2xl border border-zen-border bg-white p-5 shadow-sm">
+                    <span class="rounded-md bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">${item.title}</span>
+                    <p class="mt-3 text-sm leading-7 text-zen-text font-medium">${item.desc}</p>
+                </article>
+            `).join('');
         }
 
-        const themePrompts = {
-            "做好事": "a wholesome act of kindness, helping hands, warm lantern, golden light",
-            "說好話": "gentle uplifting words, peaceful lotus flowers, soft golden light",
-            "存好心": "compassionate heart, serene meditating figure, peaceful warm aura",
-            "給人信心": "bright sunrise, quiet path, courage and inspiration, majestic landscape",
-            "給人希望": "sunlight through clouds, fresh green sprout, hopeful peaceful scene",
-            "給人歡喜": "joyful warm atmosphere, blooming flowers, peaceful happiness",
-            "給人方便": "welcoming bridge, open door with warm light, helpful guidance"
-        };
-
-        function updateQuote() {
-            const theme = document.getElementById("theme-select").value;
-            document.getElementById("quote-input").value =
-                `${theme}：心存善念，口出善言，身行善事。`;
-            updatePreviewText();
-        }
-
+        // 文字即時預覽設定
         function updatePreviewText() {
-            const text = document.getElementById("quote-input").value ||
-                "做好事：心存善念，口出善言，身行善事。";
-
+            const text = document.getElementById("quote-input").value || "做好事：心存善念，口出善言，身行善事。";
             const font = document.getElementById("font-select").value;
             const color = document.getElementById("color-input").value;
             const size = document.getElementById("font-size-input").value;
+            const align = document.getElementById("align-select").value;
+            const overlayVal = document.getElementById("overlay-input").value;
 
-            document.getElementById("preview-text").textContent = text;
-            document.getElementById("preview-text").style.fontFamily =
-                `'${font}', serif, sans-serif`;
-            document.getElementById("preview-text").style.color = color;
-            document.getElementById("preview-text").style.fontSize = `${size}px`;
+            const previewText = document.getElementById("preview-text");
+            previewText.textContent = text;
+            previewText.style.fontFamily = `'${font}', serif, sans-serif`;
+            previewText.style.color = color;
+            previewText.style.fontSize = `${size}px`;
             document.getElementById("font-size-label").textContent = `${size}px`;
+
+            document.getElementById("overlay-label").textContent = `${overlayVal}%`;
+            document.getElementById("preview-overlay").style.backgroundColor = `rgba(0, 0, 0, ${overlayVal / 100})`;
+
+            const textBox = document.getElementById("preview-text-box");
+            if (align === "top") textBox.className = "relative z-10 flex h-full flex-col items-center justify-start pt-12 px-8 text-center";
+            else if (align === "bottom") textBox.className = "relative z-10 flex h-full flex-col items-center justify-end pb-12 px-8 text-center";
+            else textBox.className = "relative z-10 flex h-full flex-col items-center justify-center px-8 text-center";
         }
 
-        function updateGenerateButton(secondsLeft) {
-            const button = document.getElementById("generate-button");
-            const label = button.querySelector("span");
-            const icon = button.querySelector("svg, i");
-
-            if (secondsLeft > 0) {
-                button.disabled = true;
-                button.classList.add("opacity-60");
-                label.textContent = `冷卻中，還剩 ${secondsLeft} 秒`;
-                if (icon) icon.classList.add("hidden");
-            } else {
-                button.disabled = false;
-                button.classList.remove("opacity-60");
-                label.textContent = "生成純淨正能量 AI 圖片";
-                if (icon) icon.classList.remove("hidden");
-            }
+        function setTextColor(hex) {
+            document.getElementById("color-input").value = hex;
+            updatePreviewText();
         }
 
-        function updateCooldown() {
-            const endTime = Number(localStorage.getItem(COOLDOWN_KEY) || 0);
-            const secondsLeft = Math.max(
-                0,
-                Math.ceil((endTime - Date.now()) / 1000)
-            );
-
-            updateGenerateButton(secondsLeft);
-
-            if (secondsLeft > 0) {
-                showShibaGame();
-
-                if (!cooldownInterval) {
-                    cooldownInterval = setInterval(updateCooldown, 250);
-                }
-            } else {
-                localStorage.removeItem(COOLDOWN_KEY);
-                hideShibaGame();
-
-                if (cooldownInterval) {
-                    clearInterval(cooldownInterval);
-                    cooldownInterval = null;
-                }
-            }
-        }
-
-        function startCooldown() {
-            localStorage.setItem(
-                COOLDOWN_KEY,
-                String(Date.now() + COOLDOWN_TIME)
-            );
-
-            updateCooldown();
-        }
-
-        function createGameOverlay(overlay) {
-            overlay.innerHTML = `
-        <div class="w-full max-w-xl px-4 text-center">
-          <h3 class="mb-1 text-lg font-bold text-amber-100">柴犬奔跑中</h3>
-          <p class="mb-3 text-xs text-amber-100/90">
-            按空白鍵、↑ 或點擊遊戲畫面跳躍
-          </p>
-
-          <canvas
-            id="shiba-canvas"
-            height="220"
-            class="w-full cursor-pointer rounded-xl border border-amber-100/50 bg-sky-100 shadow-lg">
-          </canvas>
-
-          <p id="game-message" class="mt-2 h-5 text-xs text-amber-100"></p>
-        </div>
-      `;
-
-            const canvas = document.getElementById("shiba-canvas");
-            const message = document.getElementById("game-message");
-
-            const resizeCanvas = () => {
-                canvas.width = Math.max(
-                    280,
-                    Math.min(640, canvas.parentElement.clientWidth)
-                );
-
-                if (gameState) {
-                    gameState.groundY = canvas.height - 42;
-                }
-            };
-
-            resizeCanvas();
-
-            resizeHandler = resizeCanvas;
-            window.addEventListener("resize", resizeHandler);
-
-            gameState = {
-                canvas,
-                context: canvas.getContext("2d"),
-                message,
-                dog: {
-                    x: 55,
-                    y: 0,
-                    width: 42,
-                    height: 34,
-                    velocityY: 0,
-                    grounded: true
-                },
-                obstacles: [],
-                groundY: canvas.height - 42,
-                lastTime: performance.now(),
-                obstacleTimer: 700,
-                score: 0,
-                gameOver: false
-            };
-
-            canvas.addEventListener("click", jumpShiba);
-            startGame();
-        }
-
-        function showShibaGame() {
-            const area = document.getElementById("preview-area");
-            let overlay = document.getElementById("game-overlay");
-
-            if (!overlay) {
-                overlay = document.createElement("div");
-                overlay.id = "game-overlay";
-                area.appendChild(overlay);
-            }
-
-            overlay.className =
-                "absolute inset-0 z-30 flex items-center justify-center overflow-hidden rounded-xl bg-black/60 backdrop-blur-sm";
-
-            if (!gameState) {
-                createGameOverlay(overlay);
-            }
-        }
-
-        function hideShibaGame() {
-            if (gameAnimation) {
-                cancelAnimationFrame(gameAnimation);
-                gameAnimation = null;
-            }
-
-            if (resizeHandler) {
-                window.removeEventListener("resize", resizeHandler);
-                resizeHandler = null;
-            }
-
-            const overlay = document.getElementById("game-overlay");
-
-            if (overlay) {
-                overlay.remove();
-            }
-
-            gameState = null;
-        }
-
-        function jumpShiba() {
-            if (!gameState) return;
-
-            if (gameState.gameOver) {
-                startGame();
-                return;
-            }
-
-            if (gameState.dog.grounded) {
-                gameState.dog.velocityY = -620;
-                gameState.dog.grounded = false;
-            }
-        }
-
-        document.addEventListener("keydown", event => {
-            if (event.code === "Space" || event.code === "ArrowUp") {
-                if (gameState) {
-                    event.preventDefault();
-                    jumpShiba();
-                }
-            }
-        });
-
-        function drawShiba(context, dog) {
-            const x = dog.x;
-            const y = dog.y;
-            const movement = Math.sin(Date.now() / 90) * 2;
-
-            context.save();
-            context.translate(x, y + movement);
-
-            context.fillStyle = "#C87535";
-            context.beginPath();
-            context.ellipse(20, 20, 18, 12, 0, 0, Math.PI * 2);
-            context.fill();
-
-            context.fillStyle = "#E8A15B";
-            context.beginPath();
-            context.arc(35, 13, 12, 0, Math.PI * 2);
-            context.fill();
-
-            context.fillStyle = "#A85428";
-            context.beginPath();
-            context.moveTo(27, 5);
-            context.lineTo(29, -7);
-            context.lineTo(36, 3);
-            context.moveTo(39, 3);
-            context.lineTo(47, -6);
-            context.lineTo(48, 9);
-            context.fill();
-
-            context.fillStyle = "#FFF1D6";
-            context.beginPath();
-            context.ellipse(39, 16, 7, 5, 0, 0, Math.PI * 2);
-            context.fill();
-
-            context.fillStyle = "#2C2A29";
-            context.beginPath();
-            context.arc(40, 11, 1.5, 0, Math.PI * 2);
-            context.arc(46, 17, 1.8, 0, Math.PI * 2);
-            context.fill();
-
-            context.strokeStyle = "#8B451F";
-            context.lineWidth = 3;
-            context.beginPath();
-            context.moveTo(8, 27);
-            context.lineTo(5, 34 + movement);
-            context.moveTo(27, 28);
-            context.lineTo(30, 34 - movement);
-            context.stroke();
-
-            context.restore();
-        }
-
-        function drawGame() {
-            if (!gameState) return;
-
-            const {
-                canvas,
-                context,
-                dog,
-                obstacles,
-                groundY,
-                score,
-                gameOver
-            } = gameState;
-
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.fillStyle = "#DDF3FF";
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            context.fillStyle = "#FFFFFF";
-            context.beginPath();
-            context.arc(canvas.width - 80, 38, 22, 0, Math.PI * 2);
-            context.arc(canvas.width - 52, 38, 17, 0, Math.PI * 2);
-            context.fill();
-
-            context.fillStyle = "#B8D994";
-            context.fillRect(0, groundY, canvas.width, canvas.height - groundY);
-
-            context.fillStyle = "#7EAA55";
-            context.fillRect(0, groundY, canvas.width, 3);
-
-            context.fillStyle = "#4D733C";
-
-            obstacles.forEach(obstacle => {
-                context.fillRect(
-                    obstacle.x,
-                    groundY - obstacle.height,
-                    obstacle.width,
-                    obstacle.height
-                );
-
-                context.fillRect(
-                    obstacle.x - 3,
-                    groundY - obstacle.height,
-                    obstacle.width + 6,
-                    4
-                );
-            });
-
-            drawShiba(context, dog);
-
-            context.fillStyle = "#6B4A2F";
-            context.font = "bold 14px sans-serif";
-            context.fillText(`分數：${Math.floor(score)}`, 12, 22);
-
-            if (gameOver) {
-                context.fillStyle = "rgba(44, 42, 41, 0.65)";
-                context.fillRect(0, 0, canvas.width, canvas.height);
-
-                context.fillStyle = "#FFF8E7";
-                context.textAlign = "center";
-                context.font = "bold 20px sans-serif";
-                context.fillText("柴犬跌倒了！", canvas.width / 2, canvas.height / 2);
-
-                context.font = "13px sans-serif";
-                context.fillText(
-                    "點擊遊戲畫面重新開始",
-                    canvas.width / 2,
-                    canvas.height / 2 + 25
-                );
-
-                context.textAlign = "left";
-            }
-        }
-
-        function startGame() {
-            if (!gameState) return;
-
-            if (gameAnimation) {
-                cancelAnimationFrame(gameAnimation);
-            }
-
-            const state = gameState;
-
-            state.groundY = state.canvas.height - 42;
-            state.dog.y = state.groundY - state.dog.height;
-            state.dog.velocityY = 0;
-            state.dog.grounded = true;
-            state.obstacles = [];
-            state.obstacleTimer = 700;
-            state.score = 0;
-            state.gameOver = false;
-            state.lastTime = performance.now();
-            state.message.textContent = "";
-
-            const loop = now => {
-                if (!gameState || gameState !== state) return;
-
-                const delta = Math.min(40, now - state.lastTime);
-                state.lastTime = now;
-
-                if (!state.gameOver) {
-                    const speed = 0.34 + Math.min(state.score, 250) * 0.0004;
-
-                    state.dog.velocityY += 1.55 * delta;
-                    state.dog.y += state.dog.velocityY * delta;
-
-                    if (state.dog.y >= state.groundY - state.dog.height) {
-                        state.dog.y = state.groundY - state.dog.height;
-                        state.dog.velocityY = 0;
-                        state.dog.grounded = true;
-                    }
-
-                    state.obstacleTimer -= delta;
-
-                    if (state.obstacleTimer <= 0) {
-                        state.obstacles.push({
-                            x: state.canvas.width + 10,
-                            width: 14 + Math.random() * 10,
-                            height: 22 + Math.random() * 24
-                        });
-
-                        state.obstacleTimer = 900 + Math.random() * 800;
-                    }
-
-                    state.obstacles.forEach(obstacle => {
-                        obstacle.x -= speed * delta;
-                    });
-
-                    state.obstacles = state.obstacles.filter(
-                        obstacle => obstacle.x + obstacle.width > 0
-                    );
-
-                    state.score += delta / 100;
-
-                    const dogBox = {
-                        left: state.dog.x + 5,
-                        right: state.dog.x + 37,
-                        top: state.dog.y + 4,
-                        bottom: state.dog.y + 34
-                    };
-
-                    const collided = state.obstacles.some(obstacle => {
-                        return (
-                            dogBox.right > obstacle.x &&
-                            dogBox.left < obstacle.x + obstacle.width &&
-                            dogBox.bottom > state.groundY - obstacle.height
-                        );
-                    });
-
-                    if (collided) {
-                        state.gameOver = true;
-                        state.message.textContent =
-                            "別擔心，冷卻結束前還可以繼續挑戰！";
-                    }
-                }
-
-                drawGame();
-                gameAnimation = requestAnimationFrame(loop);
-            };
-
-            gameAnimation = requestAnimationFrame(loop);
-        }
-
-        function generateImage() {
-            const cooldownEnd = Number(localStorage.getItem(COOLDOWN_KEY) || 0);
-
-            if (cooldownEnd > Date.now()) {
-                updateCooldown();
-                return;
-            }
-
-            const theme = document.getElementById("theme-select").value;
-            const style = document.getElementById("style-select").value;
-            const image = document.getElementById("preview-image");
-
-            const prompt = encodeURIComponent(
-                `${themePrompts[theme]}, ${style}, wholesome, pure, serene, family friendly, no text`
-            );
-
-            const seed = Math.floor(Math.random() * 999999);
-
-            startCooldown();
-            showShibaGame();
-
-            image.src =
-                `https://image.pollinations.ai/prompt/${prompt}` +
-                `?width=800&height=1000&seed=${seed}&nologo=true`;
-        }
-
-        document.querySelectorAll(".nav-btn").forEach(button => {
-            button.className =
-                "nav-btn flex items-center gap-1 rounded-lg px-3 py-2 text-xs font-medium text-zen-muted transition hover:bg-amber-50 hover:text-amber-900 sm:px-4 sm:text-sm";
-        });
-
-        document.querySelectorAll(".nav-btn.active").forEach(button => {
-            button.classList.add("bg-amber-100", "text-amber-900");
-        });
-
-        document.querySelectorAll(".scenario-btn").forEach(button => {
-            button.className =
-                "scenario-btn rounded-xl border border-zen-border bg-white px-4 py-2 text-sm font-medium text-zen-muted";
-        });
-
-        document.querySelectorAll(".scenario-btn.active").forEach(button => {
-            button.classList.add("border-amber-800", "bg-amber-800", "text-white");
-        });
-
-        document.querySelectorAll(".nav-btn").forEach(button => {
-            button.addEventListener("click", () => {
-                document.querySelectorAll(".nav-btn").forEach(item => {
-                    item.classList.remove("bg-amber-100", "text-amber-900");
+        // Canvas 高畫質合成與下載
+        function downloadCardImage() {
+            const canvas = document.getElementById("export-canvas");
+            const ctx = canvas.getContext("2d");
+            const img = document.getElementById("preview-image");
+
+            canvas.width = 800;
+            canvas.height = 1000;
+
+            const text = document.getElementById("quote-input").value || "";
+            const font = document.getElementById("font-select").value;
+            const color = document.getElementById("color-input").value;
+            const size = parseInt(document.getElementById("font-size-input").value) * 1.25;
+            const align = document.getElementById("align-select").value;
+            const overlayVal = parseInt(document.getElementById("overlay-input").value) / 100;
+
+            const renderCanvasContent = () => {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = `rgba(0, 0, 0, ${overlayVal})`;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = color;
+                ctx.font = `${size}px '${font}', sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+
+                const lines = text.split("\n");
+                const lineHeight = size * 1.4;
+                const totalHeight = lines.length * lineHeight;
+
+                let startY = canvas.height / 2;
+                if (align === "top") startY = 180 + totalHeight / 2;
+                else if (align === "bottom") startY = canvas.height - 180 - totalHeight / 2;
+
+                ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
+                lines.forEach((line, index) => {
+                    const y = startY - (totalHeight / 2) + (index * lineHeight) + (lineHeight / 2);
+                    ctx.fillText(line, canvas.width / 2, y);
                 });
 
-                button.classList.add("bg-amber-100", "text-amber-900");
-            });
-        });
+                ctx.font = "16px 'Noto Serif TC', serif";
+                ctx.fillStyle = "#FEF3C7";
+                ctx.fillText("—— 三好四給 · 心靈卡片", canvas.width / 2, canvas.height - 60);
 
+                const link = document.createElement("a");
+                link.download = `三好四給靜心卡片_${Date.now()}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            };
+
+            if (img.complete) {
+                renderCanvasContent();
+            } else {
+                img.onload = renderCanvasContent;
+            }
+        }
+
+        // 初始化
+        initPhotoGrid();
+        selectPhoto(0);
         switchScenario("school");
-        updateQuote();
-        updateCooldown();
-        lucide.createIcons();
+        updatePreviewText();
+        try { lucide.createIcons(); } catch (e) { }
     </script>
 </body>
 
